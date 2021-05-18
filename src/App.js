@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router';
 import Estudiantes from './components/pages/Estudiantes';
 import Inicio from './components/pages/Inicio';
 import Sidebar from './components/ui/Sidebar';
-
+import Libro from './components/pages/Libro';
 
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/estudiantes" element={<Estudiantes />} />
+          <Route path="/libro" element={<Libro />} />
 
 
         </Routes>
