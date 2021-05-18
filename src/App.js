@@ -8,7 +8,7 @@ import Sidebar from './components/ui/Sidebar';
 
 function App() {
   return (
-    <div className="md:flex">
+    <div className="md:flex min-h-screen">
     <Sidebar />
       <di className="md:w-3/5 xl:w-4/5">
         
