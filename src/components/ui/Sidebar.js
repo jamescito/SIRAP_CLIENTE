@@ -20,6 +20,11 @@ const Sidebar = () => {
                         Libros</NavLink>
                 </nav>
 
+                <nav className="mt-12">
+                    <NavLink activeClassName="text-white" to="/Prestamos" className="p-1 text-white-400 block hover:bg-white hover:text-yellow-700" >
+                    Prestamos</NavLink>
+                </nav>
+
             </div>
         </div>
     );
