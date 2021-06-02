@@ -4,17 +4,18 @@ import * as Yup from 'yup';
 import {useFormik} from 'formik';
 import {useNavigate} from 'react-router-dom';
 
-const Estudiantes = () => {
+const EditarEstudiantes = ({estudiante}) => {
    
   // Hook para redireccionar
    const navigate = useNavigate();
  // validación y leer los datos del formulario
  const formik = useFormik({
   initialValues: {
-    codigoCarnet: '',  
-    nombre: '',
-      apellido: '',
-      carrera_id: '',
+      id: estudiante.id,
+    codigoCarnet: estudiante.codigoCarnet,  
+    nombre: estudiante.nombre,
+      apellido: estudiante.apellido,
+      carrera_id: estudiante.carrera_id,
       
   }, 
   validationSchema: Yup.object({
@@ -31,14 +32,15 @@ const Estudiantes = () => {
   onSubmit: estudiante => {
       try {   
           let config={
-            method:'post',
-            url:'http://127.0.0.1:8000/api/estudiantes',
+            method:'put',
+            url:`http://127.0.0.1:8000/api/estudiantes/${estudiante.id}`,
             headers:{
               'Accept':'application/json',
               'Content-Type':'application/json'
             },
             data:estudiante
           };
+          console.log(config);
 
           axios(config)
                   .then(response => console.log(response.data))
@@ -60,7 +62,7 @@ const Estudiantes = () => {
 
   return (
     <>
-       <h1 className="text-3xl font-light mb-4">Agregar Estudiantes</h1>
+       <h1 className="text-3xl font-light mb-4">Editar Estudiantes</h1>
 
 <div className="flex justify-center mt-10">
     <div className="w-full max-w-3xl">
@@ -77,6 +79,8 @@ const Estudiantes = () => {
                     value={formik.values.codigoCarnet}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    readOnly="true"
+
                 />
             </div>
             { formik.touched.codigoCarnet && formik.errors.codigoCarnet ? (
@@ -152,7 +156,7 @@ const Estudiantes = () => {
             <input
                 type="submit"
                 className="bg-gray-800 hover:bg-gray-900 w-full mt-5 p-2 text-white uppercase font-bold"
-                value="Agregar Estudiantes"
+                value="Actualizar Estudiantes"
             />
         </form>
     </div>
@@ -161,4 +165,4 @@ const Estudiantes = () => {
   );
 }
 
-export default Estudiantes;
+export default EditarEstudiantes;

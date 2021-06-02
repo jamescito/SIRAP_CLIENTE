@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Pagination from 'react-js-pagination';
-const MostrarEstudiantes = () => {
+import {useNavigate} from 'react-router-dom';
+
+import { NavLink } from 'react-router-dom';
+const MostrarEstudiantes = ({guardarEstudiante}) => {
     const [estudiantes, setEstudiantes] = useState({});
 
+    const navigate = useNavigate();
 
+const pasarDatosEstudiantes = (item) => {
+    console.log(item);
+    guardarEstudiante(item);
+    navigate('/EditarEstudiantes');
+}
     const obtenerDatosEstudiantes = async (numeroPagina = 1) => {
         const url = `http://127.0.0.1:8000/api/estudiantes?page=${numeroPagina}`;
         const response = await axios.get(url);
@@ -21,6 +30,7 @@ const MostrarEstudiantes = () => {
 
         return (
             <>
+            
                         <table class="table p-4 bg-white shadow rounded-lg">
                             <thead>
                                 <tr>
@@ -36,7 +46,10 @@ const MostrarEstudiantes = () => {
                                     <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
                                         Codigo de carrera </th>
 
+                             
                                 </tr>
+                                
+                                
                             </thead>
                             <tbody>
                                 {data?.map((estudiante, index) => {
@@ -46,16 +59,27 @@ const MostrarEstudiantes = () => {
                                             <td class="border p-4 dark:border-dark-5" key={index}>{estudiante.nombre}</td>
                                             <td class="border p-4 dark:border-dark-5" key={index}>{estudiante.apellido}</td>
                                             <td class="border p-4 dark:border-dark-5" key={index}>{estudiante.carrera_id}</td>
+                                           
+                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <form action="" method="post">
 
+                                               <button onClick={() => pasarDatosEstudiantes(estudiante)} className="text-indigo-600 hover:text-indigo-900 mr-4">Editar</button>
+                                                <button className="text-indigo-600 hover:text-indigo-900 mr-4">Eliminar</button>
+                                            </form>
+                                            </td> 
+                                            
                                         </tr>
                                     );
                                 })
+                                
                                 }
 
 
 
                             </tbody>
+                          
                         </table>
+                        
 
                 <div className="px-5 bg-white py-5 flex flex-col xs:flex-row items-center xs:justify-between ">
                     <Pagination
@@ -66,7 +90,6 @@ const MostrarEstudiantes = () => {
                         itemClass="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
                         linkClass="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100 "
                     />
-
 
                 </div>
             </>
