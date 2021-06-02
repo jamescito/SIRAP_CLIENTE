@@ -2,7 +2,7 @@ import React from 'react';
 
 const Inicio = () => {
     return ( 
-        <h1>Bienvenido a este sitio</h1>
+        <h1>Bienvenido a la Biblioteca</h1>
      );
 }
  

@@ -17,7 +17,7 @@ const Sidebar = () => {
 
                 <nav className="mt-12">
                     <NavLink activeClassName="text-white" to="/libro" className="p-1 text-white-400 block hover:bg-white hover:text-yellow-700" >
-                        Libros</NavLink>
+                        Agregar Libros</NavLink>
                 </nav>
 
             </div>
