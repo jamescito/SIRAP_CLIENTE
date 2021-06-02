@@ -5,23 +5,22 @@ import Inicio from './components/pages/Inicio';
 import Sidebar from './components/ui/Sidebar';
 import Libro from './components/pages/Libro';
 import Prestamos from './components/pages/Prestamos';
-
+import MostrarEstudiantes from './components/pages/MostrarEstudiantes';
 
 function App() {
   return (
     <div className="md:flex min-h-screen">
     <Sidebar />
-      <di className="md:w-3/5 xl:w-4/5">
+      <div className="md:w-3/5 xl:w-4/5">
         
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/estudiantes" element={<Estudiantes />} />
           <Route path="/libro" element={<Libro />} />
           <Route path="/Prestamos" element={<Prestamos />} />
-
-
+          <Route path="/mostrarestudiantes" element={<MostrarEstudiantes />} />
         </Routes>
-      </di>
+      </div>
 
     </div>
   );
