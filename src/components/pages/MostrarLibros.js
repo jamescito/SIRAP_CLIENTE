@@ -1,51 +1,135 @@
-import React,{useEffect,useState} from 'react';
-import {Text,FlatList, View,StyleSheet} from 'react-native';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {List,Headline,Button,FAB} from 'react-native-paper';
-import globalStyle from '../styles/Global';
+import Pagination from 'react-js-pagination';
+import { useNavigate } from 'react-router-dom';
 
-const Inicio = ({navigation}) => {
-  //state de la app
-const[clientes,guardarCliente]=useState([]);
-const[consultarApi,guardarConsultarAPI]=useState(true);
-  useEffect( ()=>{
-    const obtenerClientesApi =async()=>{
-      try {
-        //const resultado=await axios.get('http://192.168.43.253:3000/clientes');
-        const resultado=await axios.get('http:// 192.168.0.183:8000/api/lista/espaniol');
-        guardarCliente(resultado.data)
-        console.log(resultado.data)
-        guardarConsultarAPI(false);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    if(consultarApi){
-      obtenerClientesApi();
-    }
-  },[consultarApi])
+
+const MostrarLibros = ({ guardarLibros }) => {
+  const [libros, setlibros] = useState({});
+
+  const navigate = useNavigate();
+
+  const pasarDatoslibros = (item) => {
+    console.log(item);
+    guardarLibros(item);
+    navigate('/EditarEstudiantes');
+  }
+  const obtenerDatosLibros = async (numeroPagina = 1) => {
+    const url = `http://127.0.0.1:8000/api/libros?page=${numeroPagina}`;
+    const response = await axios.get(url);
+    console.log('response', response.data);
+    setlibros(response.data);
+  }
+
+  useState(() => {
+    obtenerDatosLibros();
+  }, []);
+
+  const renderizarListaLibros = () => {
+    const { data, current_page, per_page, total } = libros;
+
     return (
-        <View style={globalStyle.contender}>
-        <Button style={globalStyle.btn} icon="plus-circle" onPress={() => navigation.navigate("NuevoCliente",{guardarConsultarAPI})}> Nueva palabra</Button>
-        <Headline Style={globalStyle.titulo}>{clientes.length >0 ? "Palabras":"Aun no hay palabras "}</Headline>
-        <FlatList
-          data={clientes}
-          keyExtractor={cliente =>(cliente.id).toString() }
-          renderItem={({item}) => (
-            <List.Item
-            style={globalStyle.lista}
-              title={item.palabra}
-              description={item.traduccion}
-              onPress={ () => navigation.navigate("DetallesCliente", {item,guardarConsultarAPI})}
-            />
-          )}
-        />
-        {/* <FAB 
-          icon="plus"
-          style={globalStyle.fab}
-          onPress={() => navigation.navigate("NuevoCliente",{guardarConsultarAPI})}
-        /> */}
-        </View>
-      );
+      <>
+
+        <table class="table p-4 bg-white shadow rounded-lg">
+          <thead>
+            <tr>
+              <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                #Codigo Libro
+            </th>
+              <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                Titulo
+            </th>
+              <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                Cantidad pagina
+            </th>
+              <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                libro Original </th>
+
+              <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                Año de publicacion </th>
+
+              <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                Idioma </th>
+
+              <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                Codigo de area </th>
+
+              <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                Codigo de editoriales </th>
+
+
+            </tr>
+
+
+          </thead>
+          <tbody>
+            {data?.map((Libro, index) => {
+              return (
+                <tr class="text-gray-700">
+                  <td class="border p-4 dark:border-dark-5" key={index}>{Libro.codigolibro}</td>
+                  <td class="border p-4 dark:border-dark-5" key={index}>{Libro.titulo}</td>
+                  <td class="border p-4 dark:border-dark-5" key={index}>{Libro.cantidadpaginas}</td>
+                  <td class="border p-4 dark:border-dark-5" key={index}>{Libro.libroOriginal}</td>
+                  <td class="border p-4 dark:border-dark-5" key={index}>{Libro.aniopublicacion}</td>
+                  <td class="border p-4 dark:border-dark-5" key={index}>{Libro.idioma}</td>
+                  <td class="border p-4 dark:border-dark-5" key={index}>{Libro.area_id}</td>
+                  <td class="border p-4 dark:border-dark-5" key={index}>{Libro.editoriales_id}</td>
+
+                  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <form action="" method="post">
+
+                      <button onClick={() => pasarDatoslibros(Libro)} className="text-indigo-600 hover:text-indigo-900 mr-4">Editar</button>
+                      <button className="text-indigo-600 hover:text-indigo-900 mr-4">Eliminar</button>
+                    </form>
+                  </td>
+
+                </tr>
+              );
+            })
+
+            }
+
+
+
+          </tbody>
+
+        </table>
+
+
+
+        <div className="px-5 bg-white py-5 flex flex-col xs:flex-row items-center xs:justify-between ">
+          <Pagination
+            activePage={current_page}
+            totalItemsCount={total}
+            itemsCountPerPage={per_page}
+            onChange={(numeroPagina) => obtenerDatosLibros(numeroPagina)}
+            itemClass="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+            linkClass="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100 "
+          />
+
+        </div>
+      </>
+    )
+  }
+
+
+
+
+  return (
+    <>
+      <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
+
+        <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+          <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+            {libros && renderizarListaLibros()}
+          </div>
+        </div>
+
+      </div>
+
+    </>
+  );
 }
-export default Inicio;
+
+export default MostrarLibros;

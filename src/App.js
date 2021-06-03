@@ -8,6 +8,7 @@ import Libro from './components/pages/Libro';
 import Prestamos from './components/pages/Prestamos';
 import MostrarEstudiantes from './components/pages/MostrarEstudiantes';
 import EditarEstudiantes from './components/pages/EditarEstudiantes';
+import MostrarLibros from './components/pages/MostrarLibros';
 function App() {
   const [estudiante, guardarEstudiante] = useState({});
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/estudiantes" element={<Estudiantes />} />
           <Route path="/libro" element={<Libro />} />
 
+          <Route path="/mostrarlibros" element={<MostrarLibros />} />
           <Route path="/mostrarestudiantes" element={<MostrarEstudiantes guardarEstudiante={guardarEstudiante} />} />
           <Route path="/EditarEstudiantes" element={<EditarEstudiantes estudiante={estudiante} />} />
 

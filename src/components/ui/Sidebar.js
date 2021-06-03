@@ -7,9 +7,15 @@ const Sidebar = () => {
                 <p className="uppercase text-white text-2xl tracking-wide text-center font-bold">SIRAP</p>
                 
                 <nav className="mt-12">
+                    <NavLink activeClassName="text-white" to="/mostrarlibros" className="p-1 text-white-400 block hover:bg-white hover:text-yellow-700" >
+                        Mostrar Libros</NavLink>
+                </nav>
+
+                <nav className="mt-12">
                     <NavLink activeClassName="text-white" to="/mostrarestudiantes" className="p-1 text-white-400 block hover:bg-white hover:text-yellow-700" >
                         Mostrar Estudiantes</NavLink>
                 </nav>
+
                 <nav className="mt-12">
                     <NavLink activeClassName="text-white" to="/estudiantes" className="p-1 text-white-400 block hover:bg-white hover:text-yellow-700" >
                         Agregar Estudiantes</NavLink>
