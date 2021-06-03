@@ -79,7 +79,8 @@ const pasarDatosEstudiantes = (item) => {
                             </tbody>
                           
                         </table>
-                        
+
+                   
 
                 <div className="px-5 bg-white py-5 flex flex-col xs:flex-row items-center xs:justify-between ">
                     <Pagination

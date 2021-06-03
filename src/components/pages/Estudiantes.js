@@ -139,7 +139,10 @@ const Estudiantes = () => {
                     value={formik.values.carrera_id}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                />
+               
+
+                   
+               />
             </div>
 
             { formik.touched.carrera_id && formik.errors.carrera_id ? (
