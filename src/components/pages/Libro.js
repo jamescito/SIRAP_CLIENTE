@@ -70,7 +70,7 @@ const Libro = () => {
                     });
 
                 // Redireccionar
-                navigate('/mostrarestudiantes');
+                navigate('/mostrarlibros');
             } catch (error) {
                 console.log(error);
             }

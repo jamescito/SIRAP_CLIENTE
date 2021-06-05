@@ -12,8 +12,8 @@ const EditarEstudiantes = ({estudiante}) => {
  const formik = useFormik({
   initialValues: {
       id: estudiante.id,
-    codigoCarnet: estudiante.codigoCarnet,  
-    nombre: estudiante.nombre,
+      codigoCarnet: estudiante.codigoCarnet,  
+      nombre: estudiante.nombre,
       apellido: estudiante.apellido,
       carrera_id: estudiante.carrera_id,
       

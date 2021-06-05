@@ -4,15 +4,15 @@ import Pagination from 'react-js-pagination';
 import { useNavigate } from 'react-router-dom';
 
 
-const MostrarLibros = ({ guardarLibros }) => {
+const MostrarLibros = ({ guardarLibro }) => {
   const [libros, setlibros] = useState({});
 
   const navigate = useNavigate();
 
   const pasarDatoslibros = (item) => {
     console.log(item);
-    guardarLibros(item);
-    navigate('/EditarEstudiantes');
+    guardarLibro(item);
+    navigate('/EditarLibros');
   }
   const obtenerDatosLibros = async (numeroPagina = 1) => {
     const url = `http://127.0.0.1:8000/api/libros?page=${numeroPagina}`;
@@ -27,11 +27,10 @@ const MostrarLibros = ({ guardarLibros }) => {
 
   const renderizarListaLibros = () => {
     const { data, current_page, per_page, total } = libros;
-
     return (
       <>
 
-        <table class="table p-4 bg-white shadow rounded-lg">
+        <table class="table p-4 bg-white shadow rounded-lg ">
           <thead>
             <tr>
               <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
@@ -67,7 +66,7 @@ const MostrarLibros = ({ guardarLibros }) => {
             {data?.map((Libro, index) => {
               return (
                 <tr class="text-gray-700">
-                  <td class="border p-4 dark:border-dark-5" key={index}>{Libro.codigolibro}</td>
+                  <td class="border p-4 dark:border-dark-5 " key={index}>{Libro.codigolibro}</td>
                   <td class="border p-4 dark:border-dark-5" key={index}>{Libro.titulo}</td>
                   <td class="border p-4 dark:border-dark-5" key={index}>{Libro.cantidadpaginas}</td>
                   <td class="border p-4 dark:border-dark-5" key={index}>{Libro.libroOriginal}</td>
@@ -77,11 +76,9 @@ const MostrarLibros = ({ guardarLibros }) => {
                   <td class="border p-4 dark:border-dark-5" key={index}>{Libro.editoriales_id}</td>
 
                   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <form action="" method="post">
 
                       <button onClick={() => pasarDatoslibros(Libro)} className="text-indigo-600 hover:text-indigo-900 mr-4">Editar</button>
                       <button className="text-indigo-600 hover:text-indigo-900 mr-4">Eliminar</button>
-                    </form>
                   </td>
 
                 </tr>

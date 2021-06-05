@@ -3,7 +3,7 @@ import axios from 'axios';
 import Pagination from 'react-js-pagination';
 import {useNavigate} from 'react-router-dom';
 
-import { NavLink } from 'react-router-dom';
+
 const MostrarEstudiantes = ({guardarEstudiante}) => {
     const [estudiantes, setEstudiantes] = useState({});
 
@@ -31,7 +31,7 @@ const pasarDatosEstudiantes = (item) => {
         return (
             <>
             
-                        <table class="table p-4 bg-white shadow rounded-lg">
+                        <table class="table p-4 bg-white shadow rounded-lg ">
                             <thead>
                                 <tr>
                                     <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
@@ -82,7 +82,7 @@ const pasarDatosEstudiantes = (item) => {
 
                    
 
-                <div className="px-5 bg-white py-5 flex flex-col xs:flex-row items-center xs:justify-between ">
+                <div className="px-5 bg-white py-5 flex flex-col xs:flex-row items-center xs:justify-between  ">
                     <Pagination
                         activePage={current_page}
                         totalItemsCount={total}
