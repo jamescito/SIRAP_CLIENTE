@@ -31,7 +31,7 @@ const pasarDatosEstudiantes = (item) => {
         return (
             <>
             
-                        <table class="table p-4 bg-white shadow rounded-lg ">
+                        <table class="table p-4 bg-white shadow rounded-lg w-full container">
                             <thead>
                                 <tr>
                                     <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
