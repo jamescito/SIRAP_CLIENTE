@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Pagination from 'react-js-pagination';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate,Link} from 'react-router-dom';
+import Prestamos from './Prestamos';
 
-
-const MostrarPrestamos = () => {
+const MostrarPrestamos = ({guardarPrestamo}) => {
     const [prestamos, setPrestamos] = useState({});
 
     const navigate = useNavigate();
@@ -30,15 +30,17 @@ const pasarDatosPrestamos = (item) => {
 
         return (
             <>
-            
-                        <table class="table p-4 bg-white shadow rounded-lg w-full container">
+            <Link to="/Prestamos" className="bg-green-800 hover:bg-blue-700, inline-block mb-5 p-2 text-white uppercase font-bold">
+                Agregar Prestamos
+            </Link>
+                        <table class="bg-white shadow rounded-lg min-w-full leading-normal">
                             <thead>
                                 <tr>
                                     <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
-                                        #Codigo prestamos
+                                        #Codigo
             </th>
                                     <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
-                                        Carnet Estudiantes
+                                        Carnet
             </th>
                                     <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
                                         Codigo libro
@@ -50,7 +52,7 @@ const pasarDatosPrestamos = (item) => {
                                         Fecha devolución </th>
 
                                         <th class="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
-                                        Fecha estado de prestamo</th>
+                                        F. estado</th>
 
                              
                                 </tr>
@@ -110,7 +112,7 @@ const pasarDatosPrestamos = (item) => {
 
     return (
         <>
- <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
+ <div className="container mx-3 px-3 sm:px-6 max-w-7xl">
 
 <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
   <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">

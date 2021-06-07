@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Pagination from 'react-js-pagination';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate,Link} from 'react-router-dom';
 
 
 const MostrarEstudiantes = ({guardarEstudiante}) => {
@@ -30,7 +30,9 @@ const pasarDatosEstudiantes = (item) => {
 
         return (
             <>
-            
+            <Link to="/estudiantes" className="bg-green-800 hover:bg-blue-700, inline-block mb-5 p-2 text-white uppercase font-bold">
+                Agregar estudiante
+            </Link>
                         <table class="table p-4 bg-white shadow rounded-lg w-full container">
                             <thead>
                                 <tr>

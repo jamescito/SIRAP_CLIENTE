@@ -11,23 +11,27 @@ import EditarEstudiantes from './components/pages/EditarEstudiantes';
 import MostrarLibros from './components/pages/MostrarLibros';
 import EditarLibros from './components/pages/EditarLibros';
 import MostrarPrestamos from './components/pages/MostrarPrestamos';
-
+import EditarPrestamos from './components/pages/EditarPrestamos';
 
 function App() {
   const [estudiante, guardarEstudiante] = useState({});
   const [libro, guardarLibro] = useState({});
+  const [prestamo, guardarPrestamo] = useState({});
 
   return (
     <div className="md:flex min-h-screen">
     <Sidebar />
-      <div className="md:w-3/5 xl:w-4/5">
+      <div className="md:w-9/12 xl:w-9/12">
         
         <Routes>
           <Route path="/" element={<Inicio />} />
-          <Route path="/libro" element={<Libro />} />
+          
           <Route path="/Prestamos" element={<Prestamos />} />
-          <Route path="/mostrarprestamos" element={<MostrarPrestamos />} />
-        
+          <Route path="/mostrarprestamos" element={<MostrarPrestamos  guardarPrestamo={guardarPrestamo}/>} />
+          <Route path="/EditarPrestamos" element={<EditarPrestamos  prestamo={prestamo}/>} />
+          
+          
+        <Route path="/libro" element={<Libro />} />
         <Route path="/mostrarlibros" element={<MostrarLibros guardarLibro={guardarLibro} />} />
         <Route path="/Editarlibros" element={<EditarLibros libro={libro} />} />
         
