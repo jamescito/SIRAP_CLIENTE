@@ -5,10 +5,45 @@ import {useFormik} from 'formik';
 import {useNavigate} from 'react-router-dom';
 
 const EditarEstudiantes = ({estudiante}) => {
-   
+    const [carreras, setCarreras] = useState([]);
   // Hook para redireccionar
    const navigate = useNavigate();
  // validación y leer los datos del formulario
+
+ const obtenerDatoscarrera = async () => {
+    const url = `http://127.0.0.1:8000/api/carreras`;
+    const response = await axios.get(url);
+    console.log('response',response.data);
+    setCarreras(response.data);
+}
+
+useEffect(() => {
+    obtenerDatoscarrera();
+}, []);
+
+const redireccionarCarrera = () => {
+    return (
+        <>
+            <select 
+            id="carrera_id"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            value={formik.values.carrera_id}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            >
+                <option>-- Seleccione --</option>
+                {carreras?.map((carrera) => {
+                    return (
+                        <>
+                            <option value={carrera.codigoCarrera}>{carrera.carrera}</option>
+                        </>
+                    );
+                })}
+            </select>
+        </>
+    );
+};
+
  const formik = useFormik({
   initialValues: {
       id: estudiante.id,
@@ -135,23 +170,11 @@ const EditarEstudiantes = ({estudiante}) => {
            
 
             <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="carrera_id">Codigo carrera</label>
-                <input 
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
-                    id="carrera_id"
-                    placeholder="Codigo carrera"
-                    value={formik.values.carrera_id}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                />
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="carrera_id">Carrera</label>
+               {carreras && redireccionarCarrera()}
             </div>
 
-            { formik.touched.carrera_id && formik.errors.carrera_id ? (
-                <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-5" role="alert">
-                    <p className="font-bold">Hubo un error:</p>
-                    <p>{formik.errors.carrera_id} </p>
-                </div>
-            ) : null }
+           
 
             <input
                 type="submit"
