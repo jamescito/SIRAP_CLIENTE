@@ -7,9 +7,79 @@ import { useNavigate } from 'react-router-dom';
 
 const Libro = () => {
 
+    const [areas, setAreas] = useState([]);
+    const [editorial, setEditorial] = useState([]);
     // Hook para redireccionar
     const navigate = useNavigate();
     // validación y leer los datos del formulario
+
+    const obtenerDatosAreas = async () => {
+        const url = `http://127.0.0.1:8000/api/areas`;
+        const response = await axios.get(url);
+        console.log('response',response.data);
+        setAreas(response.data);
+    }
+
+    useEffect(() => {
+        obtenerDatosAreas();
+    }, []);
+
+    const redireccionarArea = () => {
+        return (
+            <>
+                <select 
+                id="area_id"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                value={formik.values.area_id}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                >
+                    <option>-- Seleccione --</option>
+                    {areas?.map((areas) => {
+                        return (
+                            <>
+                                <option value={areas.codigoArea}>{areas.area}</option>
+                            </>
+                        );
+                    })}
+                </select>
+            </>
+        );
+    };
+///////////////////////
+const obtenerDatosEditoriales = async () => {
+    const url = `http://127.0.0.1:8000/api/editoriales`;
+    const response = await axios.get(url);
+    console.log('response',response.data);
+    setEditorial(response.data);
+}
+
+useEffect(() => {
+    obtenerDatosEditoriales();
+}, []);
+
+const redireccionarEditoriales = () => {
+    return (
+        <>
+            <select 
+            id="editoriales_id"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            value={formik.values.editoriales_id}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            >
+                <option>-- Seleccione --</option>
+                {editorial?.map((editoriales) => {
+                    return (
+                        <>
+                            <option value={editoriales.codigoEditorial}>{editoriales.editorial}</option>
+                        </>
+                    );
+                })}
+            </select>
+        </>
+    );
+};
     const formik = useFormik({
         initialValues: {
             codigolibro: '',
@@ -210,47 +280,17 @@ const Libro = () => {
 
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="area_id">Codigo area</label>
-                            <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="area_id"
-                                type="text"
-                                placeholder="Codigo area"
-                                value={formik.values.area_id}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
-
-                                
+                            {areas && redireccionarArea()}
                             
                         </div>
-                        {formik.touched.area_id && area_id ? (
-                            <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-5" role="alert">
-                                <p className="font-bold">Hubo un error:</p>
-                                <p>{formik.errors.area_id} </p>
-                            </div>
-                        ) : null}
+
 
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="editoriales_id">Codigo editoriales</label>
-                            <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="editoriales_id"
-                                type="text"
-                                placeholder="Codigo editoriales"
-                                value={formik.values.editoriales_id}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
-
-                                
+                            {editorial && redireccionarEditoriales()}     
                             
                         </div>
-                        {formik.touched.editoriales_id && editoriales_id ? (
-                            <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-5" role="alert">
-                                <p className="font-bold">Hubo un error:</p>
-                                <p>{formik.errors.editoriales_id} </p>
-                            </div>
-                        ) : null}
+                     
 
                         <input
                             className="bg-gray-800 hover:bg-gray-900  w-full mt-5 p-2 text-white uppercase font-bold"

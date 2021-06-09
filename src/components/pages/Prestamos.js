@@ -6,9 +6,85 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Prestamos = () => {
+  const [estudiantes, setEstudiante] = useState([]);
+  const [libro, setLibro] = useState([]);
 
   // Hook para redireccionar
   const navigate = useNavigate();
+
+
+  const obtenerDatosEstudiantes = async () => {
+    const url = `http://127.0.0.1:8000/api/estudiantes`;
+    const response = await axios.get(url);
+    console.log('response',response.data);
+    setEstudiante(response.data);
+}
+
+useEffect(() => {
+    obtenerDatosEstudiantes();
+}, []);
+
+const redireccionarEstudiantes = () => {
+  const{data}=estudiantes;
+    return (
+        <>
+            <select 
+            id="estudiante_id"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            value={formik.values.estudiante_id}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            >
+                <option>-- Seleccione --</option>
+                {data?.map((estudiante) => {
+                    return (
+                        <>
+                            <option value={estudiante.codigoCarnet}>{estudiante.nombre}</option>
+                        </>
+                    );
+                })}
+            </select>
+        </>
+    );
+};
+
+//////////////////////////////
+
+const obtenerDatosLibro = async () => {
+  const url = `http://127.0.0.1:8000/api/libros`;
+  const response = await axios.get(url);
+  console.log('response',response.data);
+  setLibro(response.data);
+}
+
+useEffect(() => {
+  obtenerDatosLibro();
+}, []);
+
+const redireccionarLibro = () => {
+const{data}=libro;
+  return (
+      <>
+          <select 
+          id="libro_id"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          value={formik.values.libro_id}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          >
+              <option>-- Seleccione --</option>
+              {data?.map((libro) => {
+                  return (
+                      <>
+                          <option value={libro.codigolibro}>{libro.titulo} </option>
+                      </>
+                  );
+              })}
+          </select>
+      </>
+  );
+};
+
   // validación y leer los datos del formulario
   const formik = useFormik({
     initialValues: {
@@ -63,7 +139,7 @@ const Prestamos = () => {
           });
 
         // Redireccionar
-        // navigate('/mostrarlibros');
+         navigate('/mostrarprestamos');
       } catch (error) {
         console.log(error);
       }
@@ -99,43 +175,18 @@ const Prestamos = () => {
             ) : null}
 
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="estudiante_id">Carnet Estudiante</label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="estudiante_id"
-                type="text"
-                placeholder="Carnet Estudiante"
-                value={formik.values.estudiante_id}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="estudiante_id"> Estudiante</label>
+              {estudiantes && redireccionarEstudiantes()}
+              
             </div>
-            {formik.touched.estudiante_id && formik.errors.estudiante_id ? (
-              <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-5" role="alert">
-                <p className="font-bold">Hubo un error:</p>
-                <p>{formik.errors.estudiante_id} </p>
-              </div>
-            ) : null}
+          
 
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="libro_id">Codigo Libro</label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="libro_id"
-                type="text"
-                placeholder="Codigo Libro"
-                value={formik.values.libro_id}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-            </div>
-            {formik.touched.libro_id && formik.errors.libro_id ? (
-              <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-5" role="alert">
-                <p className="font-bold">Hubo un error:</p>
-                <p>{formik.errors.libro_id} </p>
-              </div>
-            ) : null}
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="libro_id"> Libro</label>
+              {libro && redireccionarLibro()}
 
+            </div>
+         
 
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="fechaprestamo">Fecha de Prestamo</label>
