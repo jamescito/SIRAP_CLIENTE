@@ -17,7 +17,7 @@ function App() {
   const [estudiante, guardarEstudiante] = useState({});
   const [libro, guardarLibro] = useState({});
   const [prestamo, guardarPrestamo] = useState({});
-
+  const[carrera, mostrarCarrera] = useState({});
   return (
     <div className="md:flex min-h-screen">
     <Sidebar />
@@ -37,7 +37,7 @@ function App() {
         
         
           
-          <Route path="/estudiantes" element={<Estudiantes />} />
+          <Route path="/estudiantes" element={<Estudiantes  />} />
           <Route path="/mostrarestudiantes" element={<MostrarEstudiantes guardarEstudiante={guardarEstudiante} />} />
           <Route path="/EditarEstudiantes" element={<EditarEstudiantes estudiante={estudiante} />} />
 
