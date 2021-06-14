@@ -15,7 +15,7 @@ const MostrarLibros = ({ guardarLibro }) => {
     navigate('/EditarLibros');
   }
   const obtenerDatosLibros = async (numeroPagina = 1) => {
-    const url = `http://127.0.0.1:8000/api/libros?page=${numeroPagina}`;
+    const url = `https://afternoon-caverns-98117.herokuapp.com/api/libros?page=${numeroPagina}`;
     const response = await axios.get(url);
     console.log('response', response.data);
     setlibros(response.data);

@@ -15,7 +15,7 @@ const pasarDatosEstudiantes = (item) => {
     navigate('/EditarEstudiantes');
 }
     const obtenerDatosEstudiantes = async (numeroPagina = 1) => {
-        const url = `http://127.0.0.1:8000/api/estudiantes?page=${numeroPagina}`;
+        const url = `https://afternoon-caverns-98117.herokuapp.com/api/estudiantes?page=${numeroPagina}`;
         const response = await axios.get(url);
         console.log('response',response.data);
         setEstudiantes(response.data);

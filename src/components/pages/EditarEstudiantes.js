@@ -11,7 +11,7 @@ const EditarEstudiantes = ({estudiante}) => {
  // validación y leer los datos del formulario
 
  const obtenerDatoscarrera = async () => {
-    const url = `http://127.0.0.1:8000/api/carreras`;
+    const url = `https://afternoon-caverns-98117.herokuapp.com/api/carreras`;
     const response = await axios.get(url);
     console.log('response',response.data);
     setCarreras(response.data);
@@ -68,7 +68,7 @@ const redireccionarCarrera = () => {
       try {   
           let config={
             method:'put',
-            url:`http://127.0.0.1:8000/api/estudiantes/${estudiante.id}`,
+            url:`https://afternoon-caverns-98117.herokuapp.com/api/estudiantes/${estudiante.id}`,
             headers:{
               'Accept':'application/json',
               'Content-Type':'application/json'

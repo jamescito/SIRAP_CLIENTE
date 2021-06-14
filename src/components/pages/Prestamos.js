@@ -14,7 +14,7 @@ const Prestamos = () => {
 
 
   const obtenerDatosEstudiantes = async () => {
-    const url = `http://127.0.0.1:8000/api/estudiantes`;
+    const url = `https://afternoon-caverns-98117.herokuapp.com/api/listarestudiante`;
     const response = await axios.get(url);
     console.log('response',response.data);
     setEstudiante(response.data);
@@ -51,7 +51,7 @@ const redireccionarEstudiantes = () => {
 //////////////////////////////
 
 const obtenerDatosLibro = async () => {
-  const url = `http://127.0.0.1:8000/api/libros`;
+  const url = `https://afternoon-caverns-98117.herokuapp.com/api/listar`;
   const response = await axios.get(url);
   console.log('response',response.data);
   setLibro(response.data);
@@ -122,7 +122,7 @@ const{data}=libro;
       try {
         let config = {
           method: 'post',
-          url: 'http://127.0.0.1:8000/api/prestamos',
+          url: 'https://afternoon-caverns-98117.herokuapp.com/api/prestamos',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'

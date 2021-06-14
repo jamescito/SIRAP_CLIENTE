@@ -11,7 +11,7 @@ const EditarLibros = ({libro}) => {
    const navigate = useNavigate();
 
    const obtenerDatosAreas = async () => {
-    const url = `http://127.0.0.1:8000/api/areas`;
+    const url = `https://afternoon-caverns-98117.herokuapp.com/api/areas`;
     const response = await axios.get(url);
     console.log('response',response.data);
     setAreas(response.data);
@@ -45,7 +45,7 @@ const redireccionarArea = () => {
 };
 ///////////////////////
 const obtenerDatosEditoriales = async () => {
-const url = `http://127.0.0.1:8000/api/editoriales`;
+const url = `https://afternoon-caverns-98117.herokuapp.com/api/editoriales`;
 const response = await axios.get(url);
 console.log('response',response.data);
 setEditorial(response.data);
@@ -124,7 +124,7 @@ return (
           console.log(libro);
           let config={
             method:'put',
-            url:`http://127.0.0.1:8000/api/libros/${libro.id}`,
+            url:`https://afternoon-caverns-98117.herokuapp.com/api/libros/${libro.id}`,
             headers:{
               'Accept':'application/json',
               'Content-Type':'application/json'

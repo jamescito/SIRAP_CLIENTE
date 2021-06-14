@@ -15,7 +15,7 @@ const pasarDatosPrestamos = (item) => {
     navigate('/EditarPrestamos');
 }
     const obtenerDatosPrestamos = async (numeroPagina = 1) => {
-        const url = `http://127.0.0.1:8000/api/prestamos?page=${numeroPagina}`;
+        const url = `https://afternoon-caverns-98117.herokuapp.com/api/prestamos?page=${numeroPagina}`;
         const response = await axios.get(url);
         console.log('response',response.data);
         setPrestamos(response.data);

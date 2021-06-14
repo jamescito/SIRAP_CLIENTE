@@ -12,7 +12,7 @@ const Estudiantes = () => {
     const [carreras, setCarreras] = useState([]);
 
     const obtenerDatoscarrera = async () => {
-        const url = `http://127.0.0.1:8000/api/carreras`;
+        const url = `https://afternoon-caverns-98117.herokuapp.com/api/carreras`;
         const response = await axios.get(url);
         console.log('response',response.data);
         setCarreras(response.data);
@@ -68,7 +68,7 @@ const Estudiantes = () => {
             try {
                 let config = {
                     method: 'post',
-                    url: 'http://127.0.0.1:8000/api/estudiantes',
+                    url: 'https://afternoon-caverns-98117.herokuapp.com/api/estudiantes',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
@@ -171,7 +171,7 @@ const Estudiantes = () => {
 
 
                         <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="carrera">Codigo carrera</label>
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="carrera">Carrera</label>
                             {carreras && redireccionarCarrera()}
                         </div>
                         <input

@@ -14,7 +14,7 @@ const Libro = () => {
     // validación y leer los datos del formulario
 
     const obtenerDatosAreas = async () => {
-        const url = `http://127.0.0.1:8000/api/areas`;
+        const url = `https://afternoon-caverns-98117.herokuapp.com/api/areas`;
         const response = await axios.get(url);
         console.log('response',response.data);
         setAreas(response.data);
@@ -48,7 +48,7 @@ const Libro = () => {
     };
 ///////////////////////
 const obtenerDatosEditoriales = async () => {
-    const url = `http://127.0.0.1:8000/api/editoriales`;
+    const url = `https://afternoon-caverns-98117.herokuapp.com/api/editoriales`;
     const response = await axios.get(url);
     console.log('response',response.data);
     setEditorial(response.data);
@@ -123,7 +123,7 @@ const redireccionarEditoriales = () => {
             try {
                 let config = {
                     method: 'post',
-                    url: 'http://127.0.0.1:8000/api/libros',
+                    url: 'https://afternoon-caverns-98117.herokuapp.com/api/libros',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
